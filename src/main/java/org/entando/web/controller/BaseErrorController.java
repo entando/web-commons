@@ -1,7 +1,7 @@
-package com.entando.web.controller;
+package org.entando.web.controller;
 
-import com.entando.web.exception.ErrorResponse;
-import com.entando.web.exception.ValidationErrorResponse;
+import org.entando.web.exception.ErrorResponse;
+import org.entando.web.exception.ValidationErrorResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.error.ErrorAttributes;
@@ -42,7 +42,7 @@ public class BaseErrorController implements ErrorController {
 		final Map<String, Object> errorAttribs = getErrorAttributes(request);
 		final int statusCode = (int) errorAttribs.get("status");
 		final List<FieldError> errors = (List<FieldError>) errorAttribs.get("errors");
-		final String message = messageSource.getMessage("com.entando.error.validationError", null, locale);
+		final String message = messageSource.getMessage("org.entando.error.validationError", null, locale);
 		final ErrorResponse errorResponse = errors != null
 				? new ValidationErrorResponse(message, errors)
 				: new ErrorResponse((String) errorAttribs.get("message"));

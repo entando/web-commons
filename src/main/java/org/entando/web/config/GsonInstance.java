@@ -1,4 +1,4 @@
-package com.entando.web.config;
+package org.entando.web.config;
 
 import com.google.gson.*;
 import org.springframework.context.annotation.Bean;

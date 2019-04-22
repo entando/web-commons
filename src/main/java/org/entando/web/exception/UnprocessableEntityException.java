@@ -1,4 +1,4 @@
-package com.entando.web.exception;
+package org.entando.web.exception;
 
 import org.springframework.http.HttpStatus;
 

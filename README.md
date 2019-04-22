@@ -5,7 +5,7 @@ Utilities for services built on spring boot
 Just add the dependency on your `pom.xml` file
 ```
 <dependency>
-    <groupId>com.entando</groupId>
+    <groupId>org.entando</groupId>
     <artifactId>web-commons</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 </dependency>
@@ -48,28 +48,28 @@ There's no need to use ResponseEntity to control HTTP status unless you want to 
 Throw this Exception to return 404.
 
 ```
-throw new NotFoundException("com.entando.someThingNotFound");
+throw new NotFoundException("org.entando.someThingNotFound");
 ```
 
 #### HttpException
 Throw this Exception if you want to return another HTTP status code.
 
 ```
-throw new HttpException(HttpStatus.BAD_REQUEST, "com.entando.badRequest");
+throw new HttpException(HttpStatus.BAD_REQUEST, "org.entando.badRequest");
 ```
 
 #### messages.properties
 The message passed as argument to these exceptions are i18n in the `messages.properties` file.
 
 ```
-com.entando.someThingNotFound=Something couldn't be found
-com.entando.badRequest=Request is invalid, something is missing
+org.entando.someThingNotFound=Something couldn't be found
+org.entando.badRequest=Request is invalid, something is missing
 ```
 
 Common codes
 ```
-com.entando.error.validationError=Validation error
-com.entando.error.permissionDenied=Permission denied
-com.entando.error.unauthorized=Unauthorized
-com.entando.error.internalServerError=Internal server error
+org.entando.error.validationError=Validation error
+org.entando.error.permissionDenied=Permission denied
+org.entando.error.unauthorized=Unauthorized
+org.entando.error.internalServerError=Internal server error
 ```

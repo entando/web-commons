@@ -1,10 +1,10 @@
-package com.entando.web.controller;
+package org.entando.web.controller;
 
-import com.entando.keycloak.exception.ForbiddenException;
-import com.entando.keycloak.exception.UnauthorizedException;
-import com.entando.web.exception.ErrorResponse;
-import com.entando.web.exception.HttpException;
-import com.entando.web.exception.ValidationErrorResponse;
+import org.entando.keycloak.exception.ForbiddenException;
+import org.entando.keycloak.exception.UnauthorizedException;
+import org.entando.web.exception.ErrorResponse;
+import org.entando.web.exception.HttpException;
+import org.entando.web.exception.ValidationErrorResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -34,14 +34,14 @@ public class ControllerExceptionHandler {
 	@ExceptionHandler(UnauthorizedException.class)
 	public ResponseEntity<ErrorResponse> handleException(final UnauthorizedException exception, final Locale locale) {
 		log.warn("Unauthozired exception caught {}", exception.getMessage(), exception);
-		final String message = messageSource.getMessage("com.entando.error.unauthorized", null, locale);
+		final String message = messageSource.getMessage("org.entando.error.unauthorized", null, locale);
 		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ErrorResponse(message));
 	}
 
 	@ExceptionHandler(ForbiddenException.class)
 	public ResponseEntity<ErrorResponse> handleException(final ForbiddenException exception, final Locale locale) {
 		log.warn("Forbidden exception caught {}", exception.getMessage(), exception);
-		final String message = messageSource.getMessage("com.entando.error.permissionDenied", null, locale);
+		final String message = messageSource.getMessage("org.entando.error.permissionDenied", null, locale);
 		return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new ErrorResponse(message));
 	}
 
@@ -74,7 +74,7 @@ public class ControllerExceptionHandler {
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<ValidationErrorResponse> handleValidationFailure(
 			final MethodArgumentNotValidException exception, final Locale locale) {
-		final String message = messageSource.getMessage("com.entando.error.validationError", null, locale);
+		final String message = messageSource.getMessage("org.entando.error.validationError", null, locale);
 		final ValidationErrorResponse response = new ValidationErrorResponse(message);
 
 		exception.getBindingResult().getFieldErrors().forEach(fieldError ->
@@ -89,7 +89,7 @@ public class ControllerExceptionHandler {
 			final ConstraintViolationException exception, final Locale locale) {
 		log.error("ConstraintViolationException", exception);
 
-		final String message = messageSource.getMessage("com.entando.error.validationError", null, locale);
+		final String message = messageSource.getMessage("org.entando.error.validationError", null, locale);
 		final ValidationErrorResponse response = new ValidationErrorResponse(message);
 		exception.getConstraintViolations().forEach(fieldError ->
 			response.addError(messageSource, locale, fieldError.getPropertyPath().toString(), fieldError.getMessage(), fieldError.getExecutableParameters())
@@ -100,7 +100,7 @@ public class ControllerExceptionHandler {
 
 	@ExceptionHandler(Throwable.class)
 	public ResponseEntity<ErrorResponse> handleException(final Throwable exception, final Locale locale) {
-		final String message = messageSource.getMessage("com.entando.error.internalServerError", null, locale);
+		final String message = messageSource.getMessage("org.entando.error.internalServerError", null, locale);
 		log.error("Error while trying to process request", exception);
 		return ResponseEntity.status(500).body(new ErrorResponse(message));
 	}

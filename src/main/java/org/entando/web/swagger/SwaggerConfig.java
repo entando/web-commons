@@ -1,7 +1,7 @@
-package com.entando.web.swagger;
+package org.entando.web.swagger;
 
-import com.entando.web.exception.ErrorResponse;
-import com.entando.web.exception.ValidationErrorResponse;
+import org.entando.web.exception.ErrorResponse;
+import org.entando.web.exception.ValidationErrorResponse;
 import com.fasterxml.classmate.TypeResolver;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

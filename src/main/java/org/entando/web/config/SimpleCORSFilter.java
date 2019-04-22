@@ -1,4 +1,4 @@
-package com.entando.web.config;
+package org.entando.web.config;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletResponse;

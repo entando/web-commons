@@ -1,4 +1,4 @@
-package com.entando.web.swagger;
+package org.entando.web.swagger;
 
 import lombok.Getter;
 import lombok.Setter;
