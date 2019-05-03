@@ -63,7 +63,7 @@ public class ControllerExceptionHandler {
 	@ExceptionHandler(HttpException.class)
 	public ResponseEntity<ErrorResponse> handleException(final HttpException exception, final Locale locale) {
 		return ResponseEntity.status(exception.getStatus())
-				.body(new ErrorResponse(messageSource.getMessage(exception.getMessage(), null, locale)));
+				.body(new ErrorResponse(messageSource.getMessage(exception.getMessage(), exception.getArgs(), locale)));
 	}
 
 	@ExceptionHandler(HttpMessageNotReadableException.class)
