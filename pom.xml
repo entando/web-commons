@@ -15,8 +15,35 @@
         <version>2.0.2.RELEASE</version>
         <relativePath />
     </parent>
-
+    <url>http://www.entando.com/</url>
+    <licenses>
+        <license>
+            <name>GNU LESSER GENERAL PUBLIC LICENSE,  Version 2.1, February 1999</name>
+            <url>https://www.gnu.org/licenses/lgpl-2.1.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <organization>
+        <name>Entando Inc.</name>
+        <url>http://www.entando.com/</url>
+    </organization>
+    <distributionManagement>
+        <repository>
+            <id>${maven.release.repository.id}</id>
+            <name>Releases</name>
+            <url>${maven.release.repository.url}</url>
+        </repository>
+        <snapshotRepository>
+            <id>${maven.snapshot.repository.id}</id>
+            <name>Snapshot</name>
+            <url>${maven.snapshot.repository.url}</url>
+        </snapshotRepository>
+    </distributionManagement>
     <properties>
+        <maven.release.repository.id>sonatype-nexus-stage</maven.release.repository.id>
+        <maven.snapshot.repository.id>sonatype-nexus-snapshot</maven.snapshot.repository.id>
+        <maven.snapshot.repository.url>https://oss.sonatype.org/content/repositories/snapshots</maven.snapshot.repository.url>
+        <maven.release.repository.url>https://oss.sonatype.org/content/repositories/snapshots</maven.release.repository.url>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
@@ -82,6 +109,52 @@
 
     <build>
         <plugins>
+            <!-- maven dependency-check used to analyse and process the data from the National Vulnerability Database (NVD) -->
+            <plugin>
+                <groupId>org.owasp</groupId>
+                <artifactId>dependency-check-maven</artifactId>
+                <version>4.0.2</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>aggregate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <autoUpdate>true</autoUpdate>
+                    <format>XML</format>
+                </configuration>
+            </plugin>
+            <!-- end maven dependency-check plugin -->
+            <!-- sources jars -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.0.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- end sources jars -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.10.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
                 <executions>
