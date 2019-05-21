@@ -39,6 +39,19 @@
             <url>${maven.snapshot.repository.url}</url>
         </snapshotRepository>
     </distributionManagement>
+    <repositories>
+        <repository>
+            <id>sonatype-snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+        </repository>
+    </repositories>
     <properties>
         <maven.release.repository.id>sonatype-nexus-stage</maven.release.repository.id>
         <maven.snapshot.repository.id>sonatype-nexus-snapshot</maven.snapshot.repository.id>
