@@ -2,20 +2,31 @@ package org.entando.web.response;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.hateoas.ResourceSupport;
 
 import java.util.HashMap;
 import java.util.Map;
 
-@Getter@Setter
-public class EntandoEntity<T> extends ResourceSupport {
+import static java.util.Optional.ofNullable;
 
-    private T payload;
-    private Map<String, Object> metadata = new HashMap<>();
-    private Map<String, String> errors;
+@Getter@Setter
+public class EntandoEntity<T> extends RestResponse<T, Map<String, Object>> {
+
+    public EntandoEntity(final T payload) {
+        super(payload);
+    }
+
+    public EntandoEntity() {
+        super();
+    }
 
     public void addMetadata(final String key, final Object value) {
-        metadata.put(key, value);
+        ofNullable(getMetadata()).orElseGet(this::init)
+                .put(key, value);
+    }
+
+    private Map<String, Object> init() {
+        setMetadata(new HashMap<>());
+        return getMetadata();
     }
 
 }
