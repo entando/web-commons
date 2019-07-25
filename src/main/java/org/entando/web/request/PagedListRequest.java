@@ -9,10 +9,10 @@ import java.util.List;
 public class PagedListRequest {
 
     public static final int PAGE_SIZE_DEFAULT = 100;
-    public static final String SORT_VALUE_DEFAULT = "code";
+    public static final String SORT_VALUE_DEFAULT = "id";
     public static final String DIRECTION_VALUE_DEFAULT = Filter.ASC_ORDER;
 
-    private String sort = "code";
+    private String sort = "id";
     private String direction;
     private Integer page;
     private Integer pageSize;
