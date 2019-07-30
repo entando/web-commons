@@ -7,4 +7,13 @@ package org.entando.web.response;
 @Deprecated
 public class EntandoEntity<T> extends SimpleRestResponse<T> {
 
+    public EntandoEntity(final T payload) {
+        super(payload);
+    }
+
+    public EntandoEntity() {
+        super();
+    }
+
+
 }

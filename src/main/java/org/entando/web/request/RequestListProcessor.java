@@ -11,16 +11,16 @@ import static java.util.Optional.ofNullable;
 
 public abstract class RequestListProcessor<T> {
 
-    private final RestListRequest restListRequest;
+    private final PagedListRequest pagedListRequest;
     private Stream<T> stream;
 
-    public RequestListProcessor(final RestListRequest restListRequest, final Stream<T> stream) {
-        this.restListRequest = restListRequest;
+    public RequestListProcessor(final PagedListRequest pagedListRequest, final Stream<T> stream) {
+        this.pagedListRequest = pagedListRequest;
         this.stream = stream;
     }
 
-    public RequestListProcessor(final RestListRequest restListRequest, final List<T> items) {
-        this(restListRequest, ofNullable(items).map(List::stream).orElseGet(Stream::empty));
+    public RequestListProcessor(final PagedListRequest pagedListRequest, final List<T> items) {
+        this(pagedListRequest, ofNullable(items).map(List::stream).orElseGet(Stream::empty));
     }
 
     protected abstract Function<Filter, Predicate<T>> getPredicates();
@@ -29,8 +29,8 @@ public abstract class RequestListProcessor<T> {
 
     public RequestListProcessor<T> filter() {
         Function<Filter, Predicate<T>> predicatesProvider = this.getPredicates();
-        if (null != this.restListRequest && null != this.restListRequest.getFilters()) {
-            final Filter[] filters = this.restListRequest.getFilters();
+        if (null != this.pagedListRequest && null != this.pagedListRequest.getFilters()) {
+            final Filter[] filters = this.pagedListRequest.getFilters();
             for (final Filter filter : filters) {
                 final String filterAttribute = filter.getAttribute();
                 final String filterValue = filter.getValue();
@@ -48,11 +48,11 @@ public abstract class RequestListProcessor<T> {
 
     public RequestListProcessor<T> sort() {
         final Function<String, Comparator<T>> comparatorsProvider = this.getComparators();
-        final String sort = this.restListRequest.getSort();
-        final String direction = this.restListRequest.getDirection();
+        final String sort = this.pagedListRequest.getSort();
+        final String direction = this.pagedListRequest.getDirection();
 
         if (sort != null && direction != null) {
-            Comparator comparator = comparatorsProvider.apply(this.restListRequest.getSort());
+            Comparator comparator = comparatorsProvider.apply(this.pagedListRequest.getSort());
             if (comparator != null) {
                 if (direction.equalsIgnoreCase(Filter.DESC_ORDER)) {
                     comparator = comparator.reversed();
