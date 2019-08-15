@@ -2,8 +2,10 @@ package org.entando.web.request;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class Filter {
 
     public static final String ASC_ORDER = "ASC";
@@ -21,5 +23,11 @@ public class Filter {
     private String order;
 
     private String[] allowedValues;
+
+    public Filter(final String attribute, final String value) {
+        this.attribute = attribute;
+        this.value = value;
+        this.operator = FilterOperator.EQUAL.getValue();
+    }
 
 }
