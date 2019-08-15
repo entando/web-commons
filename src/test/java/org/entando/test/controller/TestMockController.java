@@ -4,10 +4,13 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.entando.test.model.MockModel;
 import org.entando.test.model.MockModelListProcessor;
+import org.entando.web.exception.HttpException;
+import org.entando.web.exception.NotFoundException;
 import org.entando.web.request.PagedListRequest;
 import org.entando.web.response.PagedMetadata;
 import org.entando.web.response.PagedRestResponse;
 import org.entando.web.response.SimpleRestResponse;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,5 +44,14 @@ public class TestMockController {
         return new SimpleRestResponse<>(new MockModel("John", "Doe", false, 31));
     }
 
+    @GetMapping(path = "/badrequest", produces = JSON)
+    public void badRequestEndpoint() {
+        throw new HttpException(HttpStatus.BAD_REQUEST, "org.entando.test.badrequest");
+    }
+
+    @GetMapping(path = "/notfound", produces = JSON)
+    public void notFoundEndpoint() {
+        throw new NotFoundException("org.entando.test.notfound");
+    }
 
 }

@@ -90,4 +90,19 @@ public class RestTest {
                 .andExpect(jsonPath("payload.active").value(false))
                 .andExpect(jsonPath("payload.age").value(31));
     }
+
+    @Test
+    public void testBadRequestResponse() throws Exception {
+        mockMvc.perform(get("/test/badrequest"))
+                .andDo(print()).andExpect(status().isBadRequest())
+                .andExpect(jsonPath("message").value("this is a common bad request error"));
+    }
+
+    @Test
+    public void testNotFoundResponse() throws Exception {
+        mockMvc.perform(get("/test/notfound"))
+                .andDo(print()).andExpect(status().isNotFound())
+                .andExpect(jsonPath("message").value("resource not found or something else"));
+    }
+
 }
