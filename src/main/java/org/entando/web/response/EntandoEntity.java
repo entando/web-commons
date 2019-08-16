@@ -1,21 +1,19 @@
 package org.entando.web.response;
 
-import lombok.Getter;
-import lombok.Setter;
-import org.springframework.hateoas.ResourceSupport;
+/**
+ * @deprecated use {@link SimpleRestResponse} instead
+ * @param <T>
+ */
+@Deprecated
+public class EntandoEntity<T> extends SimpleRestResponse<T> {
 
-import java.util.HashMap;
-import java.util.Map;
-
-@Getter@Setter
-public class EntandoEntity<T> extends ResourceSupport {
-
-    private T payload;
-    private Map<String, Object> metadata = new HashMap<>();
-    private Map<String, String> errors;
-
-    public void addMetadata(final String key, final Object value) {
-        metadata.put(key, value);
+    public EntandoEntity(final T payload) {
+        super(payload);
     }
+
+    public EntandoEntity() {
+        super();
+    }
+
 
 }
