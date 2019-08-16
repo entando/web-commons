@@ -1,4 +1,5 @@
 # Entando WEB Commons
+[![Build Status](https://jenkins.entandocloud.com/buildStatus/icon?job=de-web-commons-master)](https://jenkins.entandocloud.com/job/de-web-commons-master/)
 Utilities for services built on spring boot
 
 # Installation
