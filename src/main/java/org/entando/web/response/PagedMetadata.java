@@ -37,10 +37,30 @@ public class PagedMetadata<T> {
         this.additionalParams = new HashMap<>();
     }
 
+    /**
+     * Constructor to build PagedMetadata using a trimmed body
+     * @param req the page request
+     * @param body the trimmed body list
+     * @param totalItems the full body size
+     */
     public PagedMetadata(final PagedListRequest req, final List<T> body, final long totalItems) {
         this(req, totalItems);
 
         this.body = body;
+    }
+
+    /**
+     * Constructor to build PagedMetadata by trimming the full body
+     * @param req the page request
+     * @param fullBody the full body list
+     */
+    public PagedMetadata(final PagedListRequest req, final List<T> fullBody) {
+        this(req, fullBody.size());
+
+        int start = (req.getPage() - 1) * req.getPageSize();
+        int end = start + req.getPageSize();
+        end = end <= fullBody.size() ? end : fullBody.size();
+        this.body = fullBody.subList(start, end);
     }
 
     public PagedMetadata(final PagedListRequest req, final long totalItems) {
