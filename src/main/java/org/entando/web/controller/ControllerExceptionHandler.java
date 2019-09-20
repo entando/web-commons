@@ -52,7 +52,8 @@ public class ControllerExceptionHandler {
 
 	@ExceptionHandler(IllegalArgumentException.class)
 	public ResponseEntity<ErrorResponse> handleException(final IllegalArgumentException exception) {
-		return ResponseEntity.status(400).body(new ErrorResponse(exception.getMessage()));
+		final String message = messageSource.getMessage(exception.getMessage(), null, Locale.getDefault());
+		return ResponseEntity.status(400).body(new ErrorResponse(message));
 	}
 
 	@ExceptionHandler(HttpRequestMethodNotSupportedException.class)
