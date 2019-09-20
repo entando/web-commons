@@ -12,7 +12,7 @@ public class PagedListRequest {
     public static final String SORT_VALUE_DEFAULT = "id";
     public static final String DIRECTION_VALUE_DEFAULT = Filter.ASC_ORDER;
 
-    private String sort = "id";
+    private String sort;
     private String direction;
     private Integer page;
     private Integer pageSize;

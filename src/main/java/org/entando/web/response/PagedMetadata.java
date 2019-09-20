@@ -63,6 +63,11 @@ public class PagedMetadata<T> {
         this.body = fullBody.subList(start, end);
     }
 
+    public PagedMetadata(final PagedListRequest req, final long totalItems, List<T> body) {
+        this(req, totalItems);
+        this.body = body;
+    }
+
     public PagedMetadata(final PagedListRequest req, final long totalItems) {
         this();
 
