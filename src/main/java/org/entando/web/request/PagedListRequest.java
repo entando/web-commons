@@ -24,6 +24,13 @@ public class PagedListRequest {
         this.page = 1;
     }
 
+    public PagedListRequest(int page, int pageSize, String sort, String direction) {
+        this.page = page;
+        this.pageSize = pageSize;
+        this.sort = sort;
+        this.direction = direction;
+    }
+
     public void addFilter(final Filter filter) {
         this.filters = ArrayUtils.add(this.filters, filter);
     }
