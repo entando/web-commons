@@ -18,8 +18,7 @@ public class BaseMapModel {
     }
 
     public BaseMapModel(Map<String,Object> map) {
-        data = Optional.ofNullable(map)
-            .orElse(new HashMap<>());
+        data = map == null ? new HashMap<>() : new HashMap<>(map);
     }
 
     public void putAll(Map<String,Object> map) {
