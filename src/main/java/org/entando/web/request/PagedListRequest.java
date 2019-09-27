@@ -12,7 +12,7 @@ public class PagedListRequest {
     public static final String SORT_VALUE_DEFAULT = "id";
     public static final String DIRECTION_VALUE_DEFAULT = Filter.ASC_ORDER;
 
-    private String sort = "id";
+    private String sort;
     private String direction;
     private Integer page;
     private Integer pageSize;
@@ -22,6 +22,13 @@ public class PagedListRequest {
         this.direction = DIRECTION_VALUE_DEFAULT;
         this.pageSize = PAGE_SIZE_DEFAULT;
         this.page = 1;
+    }
+
+    public PagedListRequest(int page, int pageSize, String sort, String direction) {
+        this.page = page;
+        this.pageSize = pageSize;
+        this.sort = sort;
+        this.direction = direction;
     }
 
     public void addFilter(final Filter filter) {

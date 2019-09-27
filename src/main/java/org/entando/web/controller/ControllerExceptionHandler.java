@@ -47,17 +47,18 @@ public class ControllerExceptionHandler {
 
 	@ExceptionHandler(HttpMediaTypeNotSupportedException.class)
 	public ResponseEntity<ErrorResponse> handleException(final HttpMediaTypeNotSupportedException exception) {
-		return ResponseEntity.status(400).body(new ErrorResponse(exception.getMessage()));
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorResponse(exception.getMessage()));
 	}
 
 	@ExceptionHandler(IllegalArgumentException.class)
 	public ResponseEntity<ErrorResponse> handleException(final IllegalArgumentException exception) {
-		return ResponseEntity.status(400).body(new ErrorResponse(exception.getMessage()));
+		final String message = messageSource.getMessage(exception.getMessage(), null, Locale.getDefault());
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorResponse(message));
 	}
 
 	@ExceptionHandler(HttpRequestMethodNotSupportedException.class)
 	public ResponseEntity<ErrorResponse> handleException(final HttpRequestMethodNotSupportedException exception) {
-		return ResponseEntity.status(405).body(new ErrorResponse(exception.getMessage()));
+		return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).body(new ErrorResponse(exception.getMessage()));
 	}
 
 	@ExceptionHandler(HttpException.class)
@@ -102,7 +103,7 @@ public class ControllerExceptionHandler {
 	public ResponseEntity<ErrorResponse> handleException(final Throwable exception, final Locale locale) {
 		final String message = messageSource.getMessage("org.entando.error.internalServerError", null, locale);
 		log.error("Error while trying to process request", exception);
-		return ResponseEntity.status(500).body(new ErrorResponse(message));
+		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorResponse(message));
 	}
 	
 }

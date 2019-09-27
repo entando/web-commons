@@ -10,6 +10,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.nullValue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -42,7 +44,7 @@ public class RestTest {
                 .andExpect(jsonPath("metadata.pageSize").value(100))
                 .andExpect(jsonPath("metadata.lastPage").value(1))
                 .andExpect(jsonPath("metadata.totalItems").value(2))
-                .andExpect(jsonPath("metadata.sort").value("id"))
+                .andExpect(jsonPath("metadata.sort", nullValue()))
                 .andExpect(jsonPath("metadata.direction").value("ASC"))
                 .andExpect(jsonPath("metadata.filters", hasSize(0)));
     }
@@ -61,7 +63,7 @@ public class RestTest {
                 .andExpect(jsonPath("metadata.pageSize").value(100))
                 .andExpect(jsonPath("metadata.lastPage").value(1))
                 .andExpect(jsonPath("metadata.totalItems").value(1))
-                .andExpect(jsonPath("metadata.sort").value("id"))
+                .andExpect(jsonPath("metadata.sort", nullValue()))
                 .andExpect(jsonPath("metadata.direction").value("ASC"))
                 .andExpect(jsonPath("metadata.filters", hasSize(1)))
                 .andExpect(jsonPath("metadata.filters[0].attribute").value("name"))
