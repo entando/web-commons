@@ -25,7 +25,7 @@ public class SimpleRestResponse<T> extends RestResponse<T, Map<String, Object>> 
     }
 
     private Map<String, Object> init() {
-        setMetadata(new HashMap<>());
+        setMetaData(new HashMap<>());
         return getMetadata();
     }
 
