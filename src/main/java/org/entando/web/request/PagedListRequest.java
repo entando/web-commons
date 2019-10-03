@@ -21,6 +21,7 @@ public class PagedListRequest {
     public PagedListRequest() {
         this.direction = DIRECTION_VALUE_DEFAULT;
         this.pageSize = PAGE_SIZE_DEFAULT;
+        this.sort = SORT_VALUE_DEFAULT;
         this.page = 1;
     }
 

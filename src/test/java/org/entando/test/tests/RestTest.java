@@ -44,7 +44,7 @@ public class RestTest {
                 .andExpect(jsonPath("metadata.pageSize").value(100))
                 .andExpect(jsonPath("metadata.lastPage").value(1))
                 .andExpect(jsonPath("metadata.totalItems").value(2))
-                .andExpect(jsonPath("metadata.sort", nullValue()))
+                .andExpect(jsonPath("metadata.sort").value("id"))
                 .andExpect(jsonPath("metadata.direction").value("ASC"))
                 .andExpect(jsonPath("metadata.filters", hasSize(0)));
     }
@@ -63,7 +63,7 @@ public class RestTest {
                 .andExpect(jsonPath("metadata.pageSize").value(100))
                 .andExpect(jsonPath("metadata.lastPage").value(1))
                 .andExpect(jsonPath("metadata.totalItems").value(1))
-                .andExpect(jsonPath("metadata.sort", nullValue()))
+                .andExpect(jsonPath("metadata.sort").value("id"))
                 .andExpect(jsonPath("metadata.direction").value("ASC"))
                 .andExpect(jsonPath("metadata.filters", hasSize(1)))
                 .andExpect(jsonPath("metadata.filters[0].attribute").value("name"))
